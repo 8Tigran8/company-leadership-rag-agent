@@ -15,11 +15,12 @@ def ingest_company(settings: Settings, conn, input_url: str, *, limit: int = 30)
     domain = normalize_domain(input_url)
     company = Company(domain=domain, name=_company_name(domain), website_url=input_url)
     urls = discover_sources(input_url, limit=limit)
-    sources = []
+    sources_by_id = {}
     for url in urls:
         source = fetch_source(url, company_domain=domain, cache_dir=settings.cache_dir / domain)
         if source is not None:
-            sources.append(source)
+            sources_by_id[source.id] = source
+    sources = list(sources_by_id.values())
 
     people, claims = extract_claims_from_sources(
         settings,
@@ -52,4 +53,3 @@ def _company_name(domain: str) -> str:
     if stem == "meetcampfire":
         return "Campfire"
     return stem.replace("-", " ").title()
-

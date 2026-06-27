@@ -18,7 +18,7 @@ def extract_claims_from_sources(
     people_by_id: dict[str, Person] = {}
     claims: list[Claim] = []
     for source in sources:
-        if not _looks_relevant(source.text):
+        if not _looks_relevant(source):
             continue
         try:
             extracted_people = extract_people(
@@ -78,10 +78,43 @@ def extract_claims_from_sources(
     return list(people_by_id.values()), claims
 
 
-def _looks_relevant(text: str) -> bool:
-    lower = text.lower()
-    terms = ["chief", "ceo", "cto", "cfo", "cmo", "vp", "vice president", "head of", "leadership"]
-    return any(term in lower for term in terms)
+def _looks_relevant(source: SourceDocument) -> bool:
+    title_url = f"{source.title} {source.url}".lower()
+    skip_terms = (
+        "/jobs",
+        "/careers",
+        "/templates",
+        "template",
+        "career",
+        "apply for a career",
+    )
+    if any(term in title_url for term in skip_terms):
+        return False
+
+    strong_source_terms = (
+        "leadership",
+        "management",
+        "governance",
+        "executive",
+        "investor",
+        "company",
+        "about",
+    )
+    text = source.text.lower()
+    role_terms = (
+        "chief",
+        "ceo",
+        "cto",
+        "cfo",
+        "cmo",
+        "vp",
+        "vice president",
+        "head of",
+        "leadership",
+    )
+    return any(term in title_url for term in strong_source_terms) and any(
+        term in text for term in role_terms
+    )
 
 
 def _now() -> str:

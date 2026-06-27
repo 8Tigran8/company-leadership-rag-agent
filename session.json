@@ -73,6 +73,10 @@
     {
       "command": "COMPANY_RAG_DB_PATH=/tmp/company-rag-smoke.sqlite uv run company-rag load-fixture data/fixtures/robinhood.com.json && COMPANY_RAG_DB_PATH=/tmp/company-rag-smoke.sqlite uv run company-rag ask robinhood.com \"Where is their CEO based?\" --no-llm",
       "status": "passed"
+    },
+    {
+      "command": "COMPANY_RAG_DB_PATH=/tmp/company-rag-asana.sqlite COMPANY_RAG_CACHE_DIR=/tmp/company-rag-asana-cache uv run company-rag ingest https://asana.com --limit 15 --output-fixture /tmp/asana-fixture.json",
+      "status": "passed: extracted 8 people and 9 claims from 7 sources after live-ingest filter hardening"
     }
   ],
   "known_limitations": [
