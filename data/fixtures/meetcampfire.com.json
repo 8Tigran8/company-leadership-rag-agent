@@ -1,0 +1,171 @@
+{
+  "claims": [
+    {
+      "claim_type": "role",
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "department": "Executive",
+      "evidence": "Campfire's official Series B blog identifies John Glasgow as CEO & Founder / Founder & CEO.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_john_glasgow_ceo",
+      "normalized_role": "CEO",
+      "person_id": "person_campfire_john_glasgow",
+      "seniority": "c_level",
+      "source_id": "src_campfire_series_b",
+      "status": "current",
+      "value": "Founder & CEO"
+    },
+    {
+      "claim_type": "location",
+      "company_domain": "meetcampfire.com",
+      "confidence": "Medium",
+      "evidence": "Public profile-derived sources list John Glasgow in San Francisco, California; Campfire's company HQ is also reported as San Francisco.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_john_glasgow_location",
+      "person_id": "person_campfire_john_glasgow",
+      "source_id": "src_campfire_john_profile",
+      "status": "current",
+      "value": "San Francisco, California"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "department": "Engineering",
+      "evidence": "Campfire's official Claude article says its engineering team is led by CTO Paul Nichols.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_paul_nichols_cto",
+      "normalized_role": "CTO",
+      "person_id": "person_campfire_paul_nichols",
+      "seniority": "c_level",
+      "source_id": "src_campfire_claude",
+      "status": "current",
+      "value": "Chief Technology Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "department": "Product",
+      "evidence": "Campfire's official AskEmber blog lists Brendan Doyle as Head of Product.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_brendan_doyle_product",
+      "normalized_role": "HEAD",
+      "person_id": "person_campfire_brendan_doyle",
+      "seniority": "head",
+      "source_id": "src_campfire_askember",
+      "status": "current",
+      "value": "Head of Product"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "meetcampfire.com",
+      "confidence": "Medium",
+      "department": "Marketing",
+      "evidence": "Public Campfire-related sources identify Katrina Queirolo as VP, Marketing, with older sources calling her Head of Marketing.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_katrina_queirolo_marketing",
+      "normalized_role": "VP",
+      "person_id": "person_campfire_katrina_queirolo",
+      "seniority": "vice_president",
+      "source_id": "src_campfire_marketing",
+      "status": "current",
+      "value": "VP, Marketing"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "department": "Engineering",
+      "evidence": "Campfire's 2024 launch blog identified Fernando San Martin as Co-founder / CTO; later sources indicate this is historical, not current.",
+      "extracted_at": "2026-06-27T00:00:00Z",
+      "id": "claim_campfire_fernando_san_martin_former_cto",
+      "normalized_role": "CTO",
+      "person_id": "person_campfire_fernando_san_martin",
+      "seniority": "c_level",
+      "source_id": "src_campfire_launch",
+      "status": "former",
+      "value": "Co-founder / CTO"
+    }
+  ],
+  "company": {
+    "domain": "meetcampfire.com",
+    "name": "Campfire",
+    "website_url": "https://campfire.ai/"
+  },
+  "generated_at": "2026-06-27T00:00:00Z",
+  "generator_version": "0.1.0",
+  "notes": [
+    "meetcampfire.com redirects to campfire.ai as of 2026-06-27.",
+    "Campfire fixture intentionally distinguishes Paul Nichols as current CTO from Fernando San Martin as historical co-founder/CTO."
+  ],
+  "people": [
+    {"company_domain": "meetcampfire.com", "id": "person_campfire_john_glasgow", "name": "John Glasgow"},
+    {"company_domain": "meetcampfire.com", "id": "person_campfire_paul_nichols", "name": "Paul Nichols"},
+    {"company_domain": "meetcampfire.com", "id": "person_campfire_brendan_doyle", "name": "Brendan Doyle"},
+    {"company_domain": "meetcampfire.com", "id": "person_campfire_katrina_queirolo", "name": "Katrina Queirolo"},
+    {"company_domain": "meetcampfire.com", "id": "person_campfire_fernando_san_martin", "name": "Fernando San Martin"}
+  ],
+  "sources": [
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_series_b",
+      "source_type": "official",
+      "text": "Official Campfire Series B blog naming John Glasgow as CEO & Founder / Founder & CEO.",
+      "title": "Campfire Series B Blog",
+      "url": "https://campfire.ai/blog/campfire-65-million-series-b-co-led-by-accel-and-ribbit"
+    },
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_claude",
+      "source_type": "official",
+      "text": "Official Campfire article stating the engineering team is led by CTO Paul Nichols.",
+      "title": "Campfire Accelerates Accounting with Claude",
+      "url": "https://campfire.ai/blog/campfire-accelerates-accounting-with-claude"
+    },
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_askember",
+      "source_type": "official",
+      "text": "Official Campfire AskEmber blog listing Brendan Doyle as Head of Product.",
+      "title": "Introducing AskEmber in Slack",
+      "url": "https://campfire.ai/blog/introducing-askember-in-slack"
+    },
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "Medium",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_marketing",
+      "source_type": "public-profile",
+      "text": "Public Campfire-related sources identify Katrina Queirolo as VP, Marketing / Head of Marketing.",
+      "title": "Campfire Marketing Leadership Public Sources",
+      "url": "https://www.unifygtm.com/customers/campfire"
+    },
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "Medium",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_john_profile",
+      "source_type": "public-profile",
+      "text": "Public profile-derived source for John Glasgow's San Francisco, California location.",
+      "title": "John Glasgow Public Profile",
+      "url": "https://www.linkedin.com/in/johnglasgow"
+    },
+    {
+      "company_domain": "meetcampfire.com",
+      "confidence": "High",
+      "fetched_at": "2026-06-27T00:00:00Z",
+      "id": "src_campfire_launch",
+      "source_type": "official",
+      "text": "Campfire 2024 launch blog identifying Fernando San Martin as historical Co-founder / CTO.",
+      "title": "Campfire Launch Blog",
+      "url": "https://campfire.ai/blog/were-coming-out-of-stealth-with-usd3-5m-in-funding-and-announcing-our-modern"
+    }
+  ]
+}
