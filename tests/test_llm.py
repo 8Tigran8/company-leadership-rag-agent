@@ -1,4 +1,4 @@
-from company_rag.llm import _validated_extracted_people
+from company_rag.llm import _resolve_codex_command, _validated_extracted_people
 
 
 def test_validated_extracted_people_coerces_empty_optional_fields() -> None:
@@ -38,3 +38,10 @@ def test_validated_extracted_people_skips_invalid_payload_items() -> None:
     )
 
     assert [person.name for person in people] == ["Valid Leader"]
+
+
+def test_resolve_codex_command_accepts_absolute_path(tmp_path) -> None:
+    codex = tmp_path / "codex"
+    codex.write_text("#!/bin/sh\n")
+
+    assert _resolve_codex_command(str(codex)) == str(codex)

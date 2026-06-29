@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import tempfile
 from contextlib import suppress
+from pathlib import Path
 from typing import Any
 
 from company_rag.config import Settings
@@ -156,7 +157,7 @@ def extract_people(settings: Settings, *, company_name: str, source_title: str, 
 
 
 def _complete_with_codex(settings: Settings, prompt: str) -> str:
-    command = shutil.which(settings.codex_command)
+    command = _resolve_codex_command(settings.codex_command)
     if command is None:
         raise LLMUnavailableError(
             f"Codex command '{settings.codex_command}' was not found. "
@@ -207,6 +208,22 @@ def _complete_with_codex(settings: Settings, prompt: str) -> str:
     finally:
         with suppress(OSError):
             os.remove(output_path)
+
+
+def _resolve_codex_command(command: str) -> str | None:
+    resolved = shutil.which(command)
+    if resolved is not None:
+        return resolved
+
+    candidate = Path(command)
+    if candidate.is_file():
+        return str(candidate)
+
+    if command == "codex":
+        bundled_codex = Path("/Applications/Codex.app/Contents/Resources/codex")
+        if bundled_codex.is_file():
+            return str(bundled_codex)
+    return None
 
 
 def _loads_json_object(content: str) -> dict[str, Any]:
