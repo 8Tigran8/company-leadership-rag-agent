@@ -3,6 +3,7 @@ from pathlib import Path
 from company_rag.config import Settings
 from company_rag.db import connect, load_fixture
 from company_rag.fixtures import read_fixture
+from company_rag.models import SourceDocument
 from company_rag.pipeline.structured import extract_structured_leadership
 from company_rag.rag.retriever import retrieve
 
@@ -78,6 +79,29 @@ def test_robinhood_fixture_covers_full_structured_leadership_source() -> None:
     assert len(fixture_claims) == 23
     assert sum(claim.normalized_role in {"VP", "SVP", "EVP"} for claim in fixture_claims) == 12
     assert all("Jason Warnick" not in claim.evidence for claim in fixture_claims)
+
+
+def test_inline_role_mentions_extract_live_cto_sentence() -> None:
+    source = SourceDocument(
+        id="src_campfire_claude_live",
+        company_domain="meetcampfire.com",
+        url="https://campfire.ai/blog/campfire-accelerates-accounting-with-claude",
+        title="Campfire accelerates accounting with Claude",
+        source_type="web",
+        fetched_at="2026-06-29T00:00:00Z",
+        text=(
+            "The engineering team at Campfire, led by CTO Paul Nichols, "
+            "leveraged Claude's financial recipes API framework for rapid deployment."
+        ),
+    )
+
+    people, claims = extract_structured_leadership(source)
+
+    assert [person.name for person in people] == ["Paul Nichols"]
+    assert len(claims) == 1
+    assert claims[0].normalized_role == "CTO"
+    assert claims[0].value == "CTO"
+    assert "led by CTO Paul Nichols" in claims[0].evidence
 
 
 def test_fixture_claims_are_supported_by_stored_source_text() -> None:

@@ -27,6 +27,10 @@
     {
       "decision": "Add optional Codex and Ollama real-LLM backends.",
       "reason": "OpenAI API keys may lack quota in local review; Codex subscription auth and local Ollama allow real answer-composition smoke tests without embedding secrets."
+    },
+    {
+      "decision": "Extract explicit role sentences deterministically before LLM fallback.",
+      "reason": "Live pages often contain simple high-signal phrases such as 'led by CTO Paul Nichols'; deterministic extraction prevents obvious public evidence from being missed by a probabilistic LLM response."
     }
   ],
   "subagents": [
@@ -67,6 +71,10 @@
     {
       "timestamp": "2026-06-29T14:00:00+03:00",
       "event": "Added optional Ollama and Codex CLI LLM providers for local real-LLM answer composition without an OpenAI API key."
+    },
+    {
+      "timestamp": "2026-06-29T20:35:00+03:00",
+      "event": "Hardened full Codex-backed live ingest by adding deterministic inline role extraction and normalization for empty optional fields in LLM JSON payloads."
     }
   ],
   "test_runs": [
@@ -76,7 +84,7 @@
     },
     {
       "command": "uv run pytest",
-      "status": "passed: 10 tests"
+      "status": "passed: 13 tests"
     },
     {
       "command": "uv run ruff check .",
@@ -93,6 +101,10 @@
     {
       "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=90 COMPANY_RAG_DB_PATH=/tmp/company-rag-codex.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
       "status": "passed: Codex subscription-backed LLM composition returned a cited Paul Nichols answer without OPENAI_API_KEY"
+    },
+    {
+      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 COMPANY_RAG_DB_PATH=/tmp/company-rag-live-codex-fixed2.sqlite COMPANY_RAG_CACHE_DIR=/tmp/company-rag-live-codex-fixed2-cache uv run company-rag ingest https://meetcampfire.com --limit 8 --output-fixture /tmp/company-rag-live-codex-fixed2-fixture.json",
+      "status": "passed: full live ingest extracted John Glasgow and Paul Nichols from live-fetched Campfire sources; LLM ask returned Paul Nichols as CTO with citation"
     },
     {
       "command": "LLM_PROVIDER=ollama OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_MODEL=qwen2.5:3b COMPANY_RAG_DB_PATH=/tmp/company-rag-ollama.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",

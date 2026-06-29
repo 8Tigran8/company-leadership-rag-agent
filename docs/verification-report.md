@@ -4,7 +4,7 @@ Generated on 2026-06-29.
 
 ## Repository State
 
-- GitHub: `https://github.com/dmitryprotasov-gif/company-leadership-rag-agent`
+- GitHub: `https://github.com/8Tigran8/company-leadership-rag-agent`
 - Default branch: `main`
 - Visibility: public
 
@@ -21,7 +21,7 @@ uv run ruff check .
 Observed test result:
 
 ```text
-10 passed
+13 passed
 ```
 
 Covered scenarios:
@@ -32,6 +32,8 @@ Covered scenarios:
 - Role normalization.
 - Fixture import.
 - Structured official leadership roster extraction.
+- Deterministic inline role extraction for explicit live-source sentences.
+- LLM extraction payload normalization for empty optional fields.
 - Fixture claim/source-text support checks.
 - Structured question routing for Robinhood.
 - Structured question routing for Campfire.
@@ -77,6 +79,29 @@ Paul Nichols is their Chief Technology Officer (CTO) [1].
 ```
 
 This mode uses official `codex exec` with local ChatGPT/Codex subscription auth. It is intended as an optional local review path; reviewers can still use `OPENAI_API_KEY`, Ollama, or `--no-llm`.
+
+Codex-backed live ingest was also verified end-to-end:
+
+```bash
+unset OPENAI_API_KEY
+LLM_PROVIDER=codex \
+CODEX_TIMEOUT_SECONDS=180 \
+COMPANY_RAG_DB_PATH=/tmp/company-rag-live-codex-fixed2.sqlite \
+COMPANY_RAG_CACHE_DIR=/tmp/company-rag-live-codex-fixed2-cache \
+uv run company-rag ingest https://meetcampfire.com --limit 8 \
+  --output-fixture /tmp/company-rag-live-codex-fixed2-fixture.json
+
+LLM_PROVIDER=codex \
+COMPANY_RAG_DB_PATH=/tmp/company-rag-live-codex-fixed2.sqlite \
+uv run company-rag ask meetcampfire.com "Who's their CTO?"
+```
+
+Result:
+
+- Ingested `meetcampfire.com`.
+- Extracted 2 people and 2 claims from 5 sources.
+- `inspect` showed John Glasgow and Paul Nichols.
+- The CTO question returned Paul Nichols with a citation to the live-fetched Campfire Claude article.
 
 ## Live Ingest Smoke On Third Company
 

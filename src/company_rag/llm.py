@@ -118,7 +118,7 @@ def extract_people(settings: Settings, *, company_name: str, source_title: str, 
         content = _complete_with_codex(settings, prompt)
         payload = _loads_json_object(content)
         people = payload.get("people", [])
-        return [LLMExtractedPerson.model_validate(item) for item in people]
+        return _validated_extracted_people(people)
 
     client = _client(settings)
     messages = [
@@ -152,7 +152,7 @@ def extract_people(settings: Settings, *, company_name: str, source_title: str, 
     content = response.choices[0].message.content or "{}"
     payload = json.loads(content)
     people = payload.get("people", [])
-    return [LLMExtractedPerson.model_validate(item) for item in people]
+    return _validated_extracted_people(people)
 
 
 def _complete_with_codex(settings: Settings, prompt: str) -> str:
@@ -219,3 +219,32 @@ def _loads_json_object(content: str) -> dict[str, Any]:
             lines = lines[:-1]
         text = "\n".join(lines).strip()
     return json.loads(text or "{}")
+
+
+def _validated_extracted_people(items: Any) -> list[LLMExtractedPerson]:
+    if not isinstance(items, list):
+        return []
+
+    people: list[LLMExtractedPerson] = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        cleaned = dict(item)
+        for key in ("department", "location", "profile_url"):
+            if _is_empty_optional_value(cleaned.get(key)):
+                cleaned[key] = None
+        if _is_empty_optional_value(cleaned.get("confidence")):
+            cleaned["confidence"] = 0.0
+        try:
+            people.append(LLMExtractedPerson.model_validate(cleaned))
+        except ValueError:
+            continue
+    return people
+
+
+def _is_empty_optional_value(value: Any) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, str):
+        return value.strip().lower() in {"", "none", "null", "n/a"}
+    return False
