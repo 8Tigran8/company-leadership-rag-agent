@@ -55,6 +55,12 @@ def normalize_title(title: str) -> NormalizedTitle:
         role, seniority = "CFO", "c_level"
     elif "chief marketing officer" in text or re.search(r"\bcmo\b", text):
         role, seniority = "CMO", "c_level"
+    elif "senior vice president" in text or re.search(r"\bsvp\b", text):
+        role, seniority = "SVP", "vice_president"
+    elif "executive vice president" in text or re.search(r"\bevp\b", text):
+        role, seniority = "EVP", "vice_president"
+    elif "vice president" in text or re.search(r"\bvp\b", text):
+        role, seniority = "VP", "vice_president"
     elif "chief operating officer" in text or re.search(r"\bcoo\b", text):
         role, seniority = "COO", "c_level"
     elif "chief information security officer" in text or re.search(r"\bciso\b", text):
@@ -65,12 +71,8 @@ def normalize_title(title: str) -> NormalizedTitle:
         role, seniority = "CLO", "c_level"
     elif "chief people officer" in text:
         role, seniority = "CPO", "c_level"
-    elif "senior vice president" in text or re.search(r"\bsvp\b", text):
-        role, seniority = "SVP", "vice_president"
-    elif "executive vice president" in text or re.search(r"\bevp\b", text):
-        role, seniority = "EVP", "vice_president"
-    elif "vice president" in text or re.search(r"\bvp\b", text):
-        role, seniority = "VP", "vice_president"
+    elif "chief " in text and " officer" in text:
+        role, seniority = "CXO", "c_level"
     elif (
         "head of " in text
         or "chief of staff" in text
@@ -90,7 +92,7 @@ def normalize_department(title: str) -> str | None:
     mappings = [
         ("Marketing", ["marketing", "brand", "communications", "growth"]),
         ("Finance", ["finance", "financial", "treasury", "accounting", "investor relations"]),
-        ("Engineering", ["engineering", "technology", "technical", "cto"]),
+        ("Engineering", ["engineering", "technology", "technical"]),
         ("Product", ["product"]),
         ("Legal", ["legal", "compliance", "general counsel", "corporate affairs"]),
         ("People", ["people", "human resources", "rewards", "talent"]),
@@ -99,6 +101,8 @@ def normalize_department(title: str) -> str | None:
         ("Security", ["security", "ciso"]),
         ("Brokerage", ["brokerage", "securities"]),
         ("Crypto", ["crypto", "bitstamp"]),
+        ("Credit Cards", ["credit card", "credit cards"]),
+        ("Markets", ["futures", "prediction markets", "tradepmr"]),
         ("Go-to-market", ["go-to-market", "sales", "partnerships", "business development"]),
         ("Executive", ["ceo", "chief executive", "founder"]),
     ]
@@ -110,5 +114,6 @@ def normalize_department(title: str) -> str | None:
 
 def is_excluded_title(title: str) -> bool:
     text = title.lower()
+    text = text.replace("investor relations", "")
     excluded = ["board", "advisor", "former", "investor", "angel", "partner at"]
     return any(word in text for word in excluded)

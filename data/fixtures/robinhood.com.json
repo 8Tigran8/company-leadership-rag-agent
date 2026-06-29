@@ -5,98 +5,49 @@
       "company_domain": "robinhood.com",
       "confidence": "High",
       "department": "Executive",
-      "evidence": "Robinhood's official leadership page lists Vlad Tenev as Chairman & Chief Executive Officer.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_vlad_tenev_ceo",
+      "evidence": "The official leadership page lists Vlad Tenev as Chairman & Chief Executive Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136063+00:00",
+      "id": "claim_robinhood-com_vlad-tenev_chairman-chief-executive-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "CEO",
-      "person_id": "person_robinhood_vlad_tenev",
+      "person_id": "person_robinhood-com_vlad-tenev",
       "seniority": "c_level",
       "source_id": "src_robinhood_leadership",
       "status": "current",
       "value": "Chairman & Chief Executive Officer"
     },
     {
-      "claim_type": "location",
+      "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "evidence": "The official Vlad Tenev management bio states that he lives in the Bay Area of California.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_vlad_tenev_location",
-      "person_id": "person_robinhood_vlad_tenev",
-      "source_id": "src_robinhood_vlad_bio",
+      "evidence": "The official leadership page lists Robb Baldwin as Managing Director, Robinhood Strategies.",
+      "extracted_at": "2026-06-29T09:51:21.136269+00:00",
+      "id": "claim_robinhood-com_robb-baldwin_managing-director-robinhood-strategies",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "DIRECTOR",
+      "person_id": "person_robinhood-com_robb-baldwin",
+      "seniority": "head",
+      "source_id": "src_robinhood_leadership",
       "status": "current",
-      "value": "Bay Area of California"
+      "value": "Managing Director, Robinhood Strategies"
     },
     {
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
       "department": "Finance",
-      "evidence": "Robinhood's official leadership page lists Shiv Verma as Chief Financial Officer.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_shiv_verma_cfo",
-      "normalized_role": "CFO",
-      "person_id": "person_robinhood_shiv_verma",
-      "seniority": "c_level",
-      "source_id": "src_robinhood_leadership",
-      "status": "current",
-      "value": "Chief Financial Officer"
-    },
-    {
-      "claim_type": "role",
-      "company_domain": "robinhood.com",
-      "confidence": "High",
-      "department": "Legal",
-      "evidence": "Robinhood's official leadership page lists Dan Gallagher as Chief Legal, Compliance and Corporate Affairs Officer.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_dan_gallagher_clo",
-      "normalized_role": "CLO",
-      "person_id": "person_robinhood_dan_gallagher",
-      "seniority": "c_level",
-      "source_id": "src_robinhood_leadership",
-      "status": "current",
-      "value": "Chief Legal, Compliance and Corporate Affairs Officer"
-    },
-    {
-      "claim_type": "role",
-      "company_domain": "robinhood.com",
-      "confidence": "High",
-      "department": "People",
-      "evidence": "Robinhood's official leadership page lists Connie Schan as Chief People Officer.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_connie_schan_cpo",
-      "normalized_role": "CPO",
-      "person_id": "person_robinhood_connie_schan",
-      "seniority": "c_level",
-      "source_id": "src_robinhood_leadership",
-      "status": "current",
-      "value": "Chief People Officer"
-    },
-    {
-      "claim_type": "role",
-      "company_domain": "robinhood.com",
-      "confidence": "High",
-      "department": "Risk",
-      "evidence": "Robinhood's official leadership page lists Pooja Anand as VP, Enterprise Risk Management and Internal Audit.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_pooja_anand_vp",
+      "evidence": "The official leadership page lists Matt Billings as VP, Brokerage; President, Robinhood Financial and Robinhood Securities.",
+      "extracted_at": "2026-06-29T09:51:21.136287+00:00",
+      "id": "claim_robinhood-com_matt-billings_vp-brokerage-president-robinhood-financial-and-robinhood-securities",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_pooja_anand",
-      "seniority": "vice_president",
-      "source_id": "src_robinhood_leadership",
-      "status": "current",
-      "value": "VP, Enterprise Risk Management and Internal Audit"
-    },
-    {
-      "claim_type": "role",
-      "company_domain": "robinhood.com",
-      "confidence": "High",
-      "department": "Brokerage",
-      "evidence": "Robinhood's official leadership page lists Matt Billings as VP, Brokerage; President, Robinhood Financial and Robinhood Securities.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_matt_billings_vp",
-      "normalized_role": "VP",
-      "person_id": "person_robinhood_matt_billings",
+      "person_id": "person_robinhood-com_matt-billings",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -106,12 +57,51 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
+      "department": "Operations",
+      "evidence": "The official leadership page lists Taylor Brown as Chief of Staff.",
+      "extracted_at": "2026-06-29T09:51:21.136301+00:00",
+      "id": "claim_robinhood-com_taylor-brown_chief-of-staff",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "HEAD",
+      "person_id": "person_robinhood-com_taylor-brown",
+      "seniority": "head",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief of Staff"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "Marketing",
+      "evidence": "The official leadership page lists Nora Chan as Senior Director, Communications.",
+      "extracted_at": "2026-06-29T09:51:21.136315+00:00",
+      "id": "claim_robinhood-com_nora-chan_senior-director-communications",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "DIRECTOR",
+      "person_id": "person_robinhood-com_nora-chan",
+      "seniority": "head",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Senior Director, Communications"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
       "department": "Product",
-      "evidence": "Robinhood's official leadership page lists Abhishek Fatehpuria as VP, Product Management.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_abhishek_fatehpuria_vp",
+      "evidence": "The official leadership page lists Abhishek Fatehpuria as VP, Product Management.",
+      "extracted_at": "2026-06-29T09:51:21.136326+00:00",
+      "id": "claim_robinhood-com_abhishek-fatehpuria_vp-product-management",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_abhishek_fatehpuria",
+      "person_id": "person_robinhood-com_abhishek-fatehpuria",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -121,12 +111,50 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
+      "department": "Legal",
+      "evidence": "The official leadership page lists Dan Gallagher as Chief Legal, Compliance and Corporate Affairs Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136340+00:00",
+      "id": "claim_robinhood-com_dan-gallagher_chief-legal-compliance-and-corporate-affairs-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "CLO",
+      "person_id": "person_robinhood-com_dan-gallagher",
+      "seniority": "c_level",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief Legal, Compliance and Corporate Affairs Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "evidence": "The official leadership page lists Stephanie Guild, CFA as Chief Investment Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136355+00:00",
+      "id": "claim_robinhood-com_stephanie-guild-cfa_chief-investment-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "CIO",
+      "person_id": "person_robinhood-com_stephanie-guild-cfa",
+      "seniority": "c_level",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief Investment Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
       "department": "Crypto",
-      "evidence": "Robinhood's official leadership page lists Johann Kerbrat as SVP and GM, Crypto and International.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_johann_kerbrat_svp",
+      "evidence": "The official leadership page lists Johann Kerbrat as SVP and GM, Crypto and International.",
+      "extracted_at": "2026-06-29T09:51:21.136368+00:00",
+      "id": "claim_robinhood-com_johann-kerbrat_svp-and-gm-crypto-and-international",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "SVP",
-      "person_id": "person_robinhood_johann_kerbrat",
+      "person_id": "person_robinhood-com_johann-kerbrat",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -137,11 +165,14 @@
       "company_domain": "robinhood.com",
       "confidence": "High",
       "department": "Finance",
-      "evidence": "Robinhood's official leadership page lists Chris Koegel as VP, Corporate Finance & Investor Relations.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_chris_koegel_vp",
+      "evidence": "The official leadership page lists Chris Koegel as VP, Corporate Finance & Investor Relations.",
+      "extracted_at": "2026-06-29T09:51:21.136379+00:00",
+      "id": "claim_robinhood-com_chris-koegel_vp-corporate-finance-investor-relations",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_chris_koegel",
+      "person_id": "person_robinhood-com_chris-koegel",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -151,12 +182,15 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "department": "Operations",
-      "evidence": "Robinhood's official leadership page lists Walter Koller as VP and COO, Robinhood Financial.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_walter_koller_vp",
+      "department": "Finance",
+      "evidence": "The official leadership page lists Walter Koller as VP and COO, Robinhood Financial.",
+      "extracted_at": "2026-06-29T09:51:21.136389+00:00",
+      "id": "claim_robinhood-com_walter-koller_vp-and-coo-robinhood-financial",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_walter_koller",
+      "person_id": "person_robinhood-com_walter-koller",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -166,12 +200,51 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "department": "Security",
-      "evidence": "Robinhood's official leadership page lists Evan McHenry as VP and Chief Information Security Officer.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_evan_mchenry_vp",
+      "department": "People",
+      "evidence": "The official leadership page lists Seok Lee as Vice President, Total Rewards.",
+      "extracted_at": "2026-06-29T09:51:21.136404+00:00",
+      "id": "claim_robinhood-com_seok-lee_vice-president-total-rewards",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_evan_mchenry",
+      "person_id": "person_robinhood-com_seok-lee",
+      "seniority": "vice_president",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Vice President, Total Rewards"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "Markets",
+      "evidence": "The official leadership page lists JB Mackenzie as Vice President and General Manager, Futures and Prediction Markets.",
+      "extracted_at": "2026-06-29T09:51:21.136420+00:00",
+      "id": "claim_robinhood-com_jb-mackenzie_vice-president-and-general-manager-futures-and-prediction-markets",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "VP",
+      "person_id": "person_robinhood-com_jb-mackenzie",
+      "seniority": "vice_president",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Vice President and General Manager, Futures and Prediction Markets"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "Security",
+      "evidence": "The official leadership page lists Evan McHenry as VP and Chief Information Security Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136434+00:00",
+      "id": "claim_robinhood-com_evan-mchenry_vp-and-chief-information-security-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "VP",
+      "person_id": "person_robinhood-com_evan-mchenry",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -181,12 +254,33 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
+      "department": "Credit Cards",
+      "evidence": "The official leadership page lists Ravi Mehta as Vice President, Credit Cards and Chief Credit Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136449+00:00",
+      "id": "claim_robinhood-com_ravi-mehta_vice-president-credit-cards-and-chief-credit-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "VP",
+      "person_id": "person_robinhood-com_ravi-mehta",
+      "seniority": "vice_president",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Vice President, Credit Cards and Chief Credit Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
       "department": "Legal",
-      "evidence": "Robinhood's official leadership page lists Lucas Moskowitz as SVP, General Counsel and Corporate Secretary.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_lucas_moskowitz_svp",
+      "evidence": "The official leadership page lists Lucas Moskowitz as SVP, General Counsel and Corporate Secretary.",
+      "extracted_at": "2026-06-29T09:51:21.136460+00:00",
+      "id": "claim_robinhood-com_lucas-moskowitz_svp-general-counsel-and-corporate-secretary",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "SVP",
-      "person_id": "person_robinhood_lucas_moskowitz",
+      "person_id": "person_robinhood-com_lucas-moskowitz",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -197,11 +291,14 @@
       "company_domain": "robinhood.com",
       "confidence": "High",
       "department": "Marketing",
-      "evidence": "Robinhood's official leadership page lists Carley Olivas as Senior Director, Brand Marketing and Marketing Operations.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_carley_olivas_marketing",
+      "evidence": "The official leadership page lists Carley Olivas as Senior Director, Brand Marketing and Marketing Operations.",
+      "extracted_at": "2026-06-29T09:51:21.136473+00:00",
+      "id": "claim_robinhood-com_carley-olivas_senior-director-brand-marketing-and-marketing-operations",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "DIRECTOR",
-      "person_id": "person_robinhood_carley_olivas",
+      "person_id": "person_robinhood-com_carley-olivas",
       "seniority": "head",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -212,11 +309,14 @@
       "company_domain": "robinhood.com",
       "confidence": "High",
       "department": "Marketing",
-      "evidence": "Robinhood's official leadership page lists Deepak Rao as SVP and GM, Robinhood Money, Robinhood Gold, Growth, and Marketing.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_deepak_rao_marketing",
+      "evidence": "The official leadership page lists Deepak Rao as SVP and GM, Robinhood Money, Robinhood Gold, Growth, and Marketing.",
+      "extracted_at": "2026-06-29T09:51:21.136485+00:00",
+      "id": "claim_robinhood-com_deepak-rao_svp-and-gm-robinhood-money-robinhood-gold-growth-and-marketing",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "SVP",
-      "person_id": "person_robinhood_deepak_rao",
+      "person_id": "person_robinhood-com_deepak-rao",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
@@ -226,16 +326,104 @@
       "claim_type": "role",
       "company_domain": "robinhood.com",
       "confidence": "High",
+      "department": "Brokerage",
+      "evidence": "The official leadership page lists Steve Quirk as Chief Brokerage Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136498+00:00",
+      "id": "claim_robinhood-com_steve-quirk_chief-brokerage-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "CXO",
+      "person_id": "person_robinhood-com_steve-quirk",
+      "seniority": "c_level",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief Brokerage Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "Finance",
+      "evidence": "The official leadership page lists Shiv Verma as Chief Financial Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136506+00:00",
+      "id": "claim_robinhood-com_shiv-verma_chief-financial-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "CFO",
+      "person_id": "person_robinhood-com_shiv-verma",
+      "seniority": "c_level",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief Financial Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "People",
+      "evidence": "The official leadership page lists Connie Schan as Chief People Officer.",
+      "extracted_at": "2026-06-29T09:51:21.136517+00:00",
+      "id": "claim_robinhood-com_connie-schan_chief-people-officer",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "CPO",
+      "person_id": "person_robinhood-com_connie-schan",
+      "seniority": "c_level",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "Chief People Officer"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
       "department": "Crypto",
-      "evidence": "Robinhood's official leadership page lists Nicola White as VP, Institutional Crypto; GM, Bitstamp.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_nicola_white_vp",
+      "evidence": "The official leadership page lists Jordan Sinclair as President of Robinhood UK and General Manager of Bitstamp UK.",
+      "extracted_at": "2026-06-29T09:51:21.136533+00:00",
+      "id": "claim_robinhood-com_jordan-sinclair_president-of-robinhood-uk-and-general-manager-of-bitstamp-uk",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "normalized_role": "HEAD",
+      "person_id": "person_robinhood-com_jordan-sinclair",
+      "seniority": "head",
+      "source_id": "src_robinhood_leadership",
+      "status": "current",
+      "value": "President of Robinhood UK and General Manager of Bitstamp UK"
+    },
+    {
+      "claim_type": "role",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "department": "Crypto",
+      "evidence": "The official leadership page lists Nicola White as VP, Institutional Crypto; GM, Bitstamp.",
+      "extracted_at": "2026-06-29T09:51:21.136546+00:00",
+      "id": "claim_robinhood-com_nicola-white_vp-institutional-crypto-gm-bitstamp",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
       "normalized_role": "VP",
-      "person_id": "person_robinhood_nicola_white",
+      "person_id": "person_robinhood-com_nicola-white",
       "seniority": "vice_president",
       "source_id": "src_robinhood_leadership",
       "status": "current",
       "value": "VP, Institutional Crypto; GM, Bitstamp"
+    },
+    {
+      "claim_type": "location",
+      "company_domain": "robinhood.com",
+      "confidence": "High",
+      "evidence": "The official Vlad Tenev management bio states that he lives in the Bay Area of California.",
+      "extracted_at": "2026-06-29T09:27:32Z",
+      "id": "claim_robinhood-com_vlad-tenev_location",
+      "metadata": {},
+      "person_id": "person_robinhood-com_vlad-tenev",
+      "source_id": "src_robinhood_vlad_bio",
+      "status": "current",
+      "value": "Bay Area of California"
     },
     {
       "claim_type": "role",
@@ -243,10 +431,11 @@
       "confidence": "High",
       "department": "Engineering",
       "evidence": "Robinhood's May 2026 Form 8-K says Jeffrey Pinner, Chief Technology Officer, separated from the company effective May 7, 2026.",
-      "extracted_at": "2026-06-27T00:00:00Z",
-      "id": "claim_robinhood_jeffrey_pinner_former_cto",
+      "extracted_at": "2026-06-29T09:27:32Z",
+      "id": "claim_robinhood-com_jeffrey-pinner_former-cto",
+      "metadata": {},
       "normalized_role": "CTO",
-      "person_id": "person_robinhood_jeffrey_pinner",
+      "person_id": "person_robinhood-com_jeffrey-pinner",
       "seniority": "c_level",
       "source_id": "src_robinhood_cto_8k",
       "status": "former",
@@ -258,58 +447,247 @@
     "name": "Robinhood",
     "website_url": "https://robinhood.com/"
   },
-  "generated_at": "2026-06-27T00:00:00Z",
+  "generated_at": "2026-06-29T09:27:32Z",
   "generator_version": "0.1.0",
   "notes": [
-    "Curated fixture from public sources researched on 2026-06-27.",
+    "Curated fixture from public sources refreshed on 2026-06-29.",
+    "Robinhood official leadership page is stored as full name/title roster text for coverage checks.",
+    "Jason Warnick is listed by Robinhood as Strategic Advisor and excluded from current operating leadership answers.",
     "Jeffrey Pinner is stored as a former CTO claim and excluded from current CTO answers."
   ],
   "people": [
-    {"company_domain": "robinhood.com", "id": "person_robinhood_vlad_tenev", "name": "Vlad Tenev"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_shiv_verma", "name": "Shiv Verma"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_dan_gallagher", "name": "Dan Gallagher"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_connie_schan", "name": "Connie Schan"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_pooja_anand", "name": "Pooja Anand"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_matt_billings", "name": "Matt Billings"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_abhishek_fatehpuria", "name": "Abhishek Fatehpuria"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_johann_kerbrat", "name": "Johann Kerbrat"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_chris_koegel", "name": "Chris Koegel"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_walter_koller", "name": "Walter Koller"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_evan_mchenry", "name": "Evan McHenry"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_lucas_moskowitz", "name": "Lucas Moskowitz"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_carley_olivas", "name": "Carley Olivas"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_deepak_rao", "name": "Deepak Rao"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_nicola_white", "name": "Nicola White"},
-    {"company_domain": "robinhood.com", "id": "person_robinhood_jeffrey_pinner", "name": "Jeffrey Pinner"}
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_vlad-tenev",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Vlad Tenev"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_robb-baldwin",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Robb Baldwin"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_matt-billings",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Matt Billings"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_taylor-brown",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Taylor Brown"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_nora-chan",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Nora Chan"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_abhishek-fatehpuria",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Abhishek Fatehpuria"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_dan-gallagher",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Dan Gallagher"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_stephanie-guild-cfa",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Stephanie Guild, CFA"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_johann-kerbrat",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Johann Kerbrat"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_chris-koegel",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Chris Koegel"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_walter-koller",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Walter Koller"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_seok-lee",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Seok Lee"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_jb-mackenzie",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "JB Mackenzie"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_evan-mchenry",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Evan McHenry"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_ravi-mehta",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Ravi Mehta"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_lucas-moskowitz",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Lucas Moskowitz"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_carley-olivas",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Carley Olivas"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_deepak-rao",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Deepak Rao"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_steve-quirk",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Steve Quirk"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_shiv-verma",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Shiv Verma"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_connie-schan",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Connie Schan"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_jordan-sinclair",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Jordan Sinclair"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_nicola-white",
+      "metadata": {
+        "extraction_method": "structured_roster"
+      },
+      "name": "Nicola White"
+    },
+    {
+      "company_domain": "robinhood.com",
+      "id": "person_robinhood-com_jeffrey-pinner",
+      "metadata": {
+        "role_status": "former"
+      },
+      "name": "Jeffrey Pinner"
+    }
   ],
   "sources": [
     {
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "fetched_at": "2026-06-27T00:00:00Z",
+      "fetched_at": "2026-06-29T09:27:32Z",
       "id": "src_robinhood_leadership",
+      "metadata": {
+        "content_scope": "official leadership roster",
+        "extraction_method": "structured_roster",
+        "retrieved_via": "public web page review"
+      },
       "source_type": "official",
-      "text": "Official Robinhood leadership roster including current executives, VPs, SVPs, and senior directors.",
+      "text": "Robinhood Investor Relations - Leadership\nVlad Tenev\nChairman & Chief Executive Officer\nRobb Baldwin\nManaging Director, Robinhood Strategies\nMatt Billings\nVP, Brokerage; President, Robinhood Financial and Robinhood Securities\nTaylor Brown\nChief of Staff\nNora Chan\nSenior Director, Communications\nAbhishek Fatehpuria\nVP, Product Management\nDan Gallagher\nChief Legal, Compliance and Corporate Affairs Officer\nStephanie Guild, CFA\nChief Investment Officer\nJohann Kerbrat\nSVP and GM, Crypto and International\nChris Koegel\nVP, Corporate Finance & Investor Relations\nWalter Koller\nVP and COO, Robinhood Financial\nSeok Lee\nVice President, Total Rewards\nJB Mackenzie\nVice President and General Manager, Futures and Prediction Markets\nEvan McHenry\nVP and Chief Information Security Officer\nRavi Mehta\nVice President, Credit Cards and Chief Credit Officer\nLucas Moskowitz\nSVP, General Counsel and Corporate Secretary\nCarley Olivas\nSenior Director, Brand Marketing and Marketing Operations\nDeepak Rao\nSVP and GM, Robinhood Money, Robinhood Gold, Growth, and Marketing\nSteve Quirk\nChief Brokerage Officer\nShiv Verma\nChief Financial Officer\nConnie Schan\nChief People Officer\nJordan Sinclair\nPresident of Robinhood UK and General Manager of Bitstamp UK\nNicola White\nVP, Institutional Crypto; GM, Bitstamp\nJason Warnick\nStrategic Advisor\n",
       "title": "Robinhood Investor Relations - Leadership",
       "url": "https://investors.robinhood.com/governance/leadership/"
     },
     {
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "fetched_at": "2026-06-27T00:00:00Z",
+      "fetched_at": "2026-06-29T09:27:32Z",
       "id": "src_robinhood_vlad_bio",
+      "metadata": {
+        "content_scope": "official executive biography"
+      },
       "source_type": "official",
-      "text": "Official Vlad Tenev management bio with Chairman and CEO role and Bay Area of California residence.",
+      "text": "Robinhood Management - Vlad Tenev\nVlad Tenev is Chairman and Chief Executive Officer of Robinhood.\nHe lives in the Bay Area of California.",
       "title": "Robinhood Management - Vlad Tenev",
       "url": "https://investors.robinhood.com/management/vlad-tenev"
     },
     {
       "company_domain": "robinhood.com",
       "confidence": "High",
-      "fetched_at": "2026-06-27T00:00:00Z",
+      "fetched_at": "2026-06-29T09:27:32Z",
       "id": "src_robinhood_cto_8k",
+      "metadata": {
+        "content_scope": "SEC filing excerpt"
+      },
       "source_type": "sec",
-      "text": "May 2026 Form 8-K disclosing that Jeffrey Pinner, Chief Technology Officer, separated from Robinhood effective May 7, 2026.",
+      "text": "Robinhood Form 8-K - CTO Departure\nJeffrey Pinner, Chief Technology Officer, separated from the company effective May 7, 2026.",
       "title": "Robinhood Form 8-K - CTO Departure",
       "url": "https://www.sec.gov/Archives/edgar/data/1783879/000178387926000065/hood-20260507.htm"
     }

@@ -41,6 +41,35 @@ uv run company-rag ask robinhood.com "Who heads marketing?"
 uv run company-rag chat robinhood.com
 ```
 
+For local LLM smoke tests without an external API key, Ollama's OpenAI-compatible endpoint can be used:
+
+```bash
+ollama serve
+ollama pull qwen2.5:3b
+
+export LLM_PROVIDER=ollama
+export OPENAI_BASE_URL=http://localhost:11434/v1
+export OPENAI_MODEL=qwen2.5:3b
+unset OPENAI_API_KEY
+
+uv run company-rag load-fixture data/fixtures/meetcampfire.com.json
+uv run company-rag ask meetcampfire.com "Who's their CTO?"
+```
+
+If Codex CLI is installed and signed in with ChatGPT/Codex subscription access, answer composition can also run through official `codex exec` without an API key:
+
+```bash
+codex login status
+
+export LLM_PROVIDER=codex
+unset OPENAI_API_KEY
+
+uv run company-rag load-fixture data/fixtures/meetcampfire.com.json
+uv run company-rag ask meetcampfire.com "Who's their CTO?"
+```
+
+This mode is intended for local review smoke tests. Reviewers who do not have Codex CLI auth can use `OPENAI_API_KEY`, Ollama, or `--no-llm`.
+
 Without `OPENAI_API_KEY`, `ask --no-llm` uses deterministic structured retrieval over the fixture. That mode is not a mocked LLM completion; it is provided so the stored data and retrieval logic are reviewable without secrets.
 
 ## CLI
@@ -82,6 +111,7 @@ Committed fixtures:
 Fixture notes:
 
 - Robinhood uses the official IR leadership page, official Vlad Tenev bio, and SEC 8-K evidence for the former CTO case.
+- Robinhood's official leadership roster is stored as full name/title source text and extracted with a deterministic structured parser so coverage can be tested.
 - Campfire uses current `campfire.ai` official blogs plus public profile/third-party sources where official leadership pages are sparse.
 - Former CTO claims are stored with `status = former` and excluded from current leadership answers.
 
@@ -110,6 +140,12 @@ See `.env.example`:
 LLM_PROVIDER=openai
 OPENAI_API_KEY=
 OPENAI_MODEL=gpt-4.1-mini
+OPENAI_BASE_URL=
+OPENAI_TIMEOUT_SECONDS=60
+OPENAI_MAX_RETRIES=3
+CODEX_COMMAND=codex
+CODEX_MODEL=
+CODEX_TIMEOUT_SECONDS=120
 COMPANY_RAG_DB_PATH=data/company_rag.sqlite
 COMPANY_RAG_CACHE_DIR=data/cache
 ```
@@ -130,10 +166,9 @@ Live tests are intended to be marked with `pytest -m live` and skipped when `OPE
 - Public leadership data can be incomplete, especially for private companies.
 - Live discovery is intentionally lightweight: sitemap, known paths, domain-specific high-signal seeds, and fetched page text.
 - LinkedIn is not scraped behind login. Public profile URLs may be stored as references.
-- The fixture reflects public data researched on 2026-06-27 and may become stale.
+- The fixture reflects public data researched/refreshed on 2026-06-29 and may become stale.
 - No web UI is included; the submitted interface is the CLI.
 
 ## Coding-Agent Evidence
 
 `session.json` records the planning and implementation decisions, subagent research, and verification runs.
-

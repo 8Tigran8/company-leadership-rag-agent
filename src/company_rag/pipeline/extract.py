@@ -6,6 +6,7 @@ from company_rag.config import Settings
 from company_rag.llm import LLMUnavailableError, extract_people
 from company_rag.models import Claim, Person, SourceDocument
 from company_rag.normalize import is_excluded_title, normalize_title, slugify
+from company_rag.pipeline.structured import extract_structured_leadership
 
 
 def extract_claims_from_sources(
@@ -18,6 +19,13 @@ def extract_claims_from_sources(
     people_by_id: dict[str, Person] = {}
     claims: list[Claim] = []
     for source in sources:
+        structured_people, structured_claims = extract_structured_leadership(source)
+        if structured_claims:
+            for person in structured_people:
+                people_by_id.setdefault(person.id, person)
+            claims.extend(structured_claims)
+            continue
+
         if not _looks_relevant(source):
             continue
         try:

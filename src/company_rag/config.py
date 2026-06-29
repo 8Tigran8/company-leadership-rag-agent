@@ -14,6 +14,12 @@ class Settings:
     llm_provider: str
     openai_api_key: str | None
     openai_model: str
+    openai_base_url: str | None = None
+    openai_timeout_seconds: float = 60.0
+    openai_max_retries: int = 3
+    codex_command: str = "codex"
+    codex_model: str | None = None
+    codex_timeout_seconds: float = 120.0
 
 
 def get_settings() -> Settings:
@@ -25,5 +31,10 @@ def get_settings() -> Settings:
         llm_provider=os.getenv("LLM_PROVIDER", "openai"),
         openai_api_key=os.getenv("OPENAI_API_KEY") or None,
         openai_model=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+        openai_base_url=os.getenv("OPENAI_BASE_URL") or None,
+        openai_timeout_seconds=float(os.getenv("OPENAI_TIMEOUT_SECONDS", "60")),
+        openai_max_retries=int(os.getenv("OPENAI_MAX_RETRIES", "3")),
+        codex_command=os.getenv("CODEX_COMMAND", "codex"),
+        codex_model=os.getenv("CODEX_MODEL") or None,
+        codex_timeout_seconds=float(os.getenv("CODEX_TIMEOUT_SECONDS", "120")),
     )
-

@@ -3,6 +3,7 @@ from pathlib import Path
 from company_rag.config import Settings
 from company_rag.db import connect, load_fixture
 from company_rag.fixtures import read_fixture
+from company_rag.pipeline.structured import extract_structured_leadership
 from company_rag.rag.retriever import retrieve
 
 
@@ -27,7 +28,9 @@ def test_fixture_load_and_robinhood_required_questions(tmp_path: Path) -> None:
         assert "Jeffrey Pinner" not in cto.answer
 
         vp_count = retrieve(conn, "robinhood.com", "How many VPs do they have?")
-        assert "10 current VP/SVP/EVP" in vp_count.answer
+        assert "12 current VP/SVP/EVP" in vp_count.answer
+        assert "Chris Koegel" in vp_count.answer
+        assert "Seok Lee" in vp_count.answer
 
         marketing = retrieve(conn, "robinhood.com", "Who heads marketing?")
         assert "Deepak Rao" in marketing.answer
@@ -53,3 +56,41 @@ def test_fixture_load_and_campfire_required_questions(tmp_path: Path) -> None:
             conn, "meetcampfire.com", "Where is their CEO based?"
         ).answer
 
+
+def test_robinhood_fixture_covers_full_structured_leadership_source() -> None:
+    fixture = read_fixture(Path("data/fixtures/robinhood.com.json"))
+    leadership_source = next(
+        source for source in fixture.sources if source.id == "src_robinhood_leadership"
+    )
+    _, extracted_claims = extract_structured_leadership(leadership_source)
+
+    fixture_claims = [
+        claim
+        for claim in fixture.claims
+        if claim.source_id == leadership_source.id
+        and claim.claim_type == "role"
+        and claim.status == "current"
+    ]
+    extracted_pairs = {(claim.person_id, claim.value) for claim in extracted_claims}
+    fixture_pairs = {(claim.person_id, claim.value) for claim in fixture_claims}
+
+    assert fixture_pairs == extracted_pairs
+    assert len(fixture_claims) == 23
+    assert sum(claim.normalized_role in {"VP", "SVP", "EVP"} for claim in fixture_claims) == 12
+    assert all("Jason Warnick" not in claim.evidence for claim in fixture_claims)
+
+
+def test_fixture_claims_are_supported_by_stored_source_text() -> None:
+    for path in [
+        Path("data/fixtures/robinhood.com.json"),
+        Path("data/fixtures/meetcampfire.com.json"),
+    ]:
+        fixture = read_fixture(path)
+        sources = {source.id: source for source in fixture.sources}
+        people = {person.id: person for person in fixture.people}
+
+        for claim in fixture.claims:
+            source_text = sources[claim.source_id].text
+            person_name = people[claim.person_id].name
+            assert person_name in source_text
+            assert claim.value in source_text

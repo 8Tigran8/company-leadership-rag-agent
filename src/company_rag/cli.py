@@ -109,7 +109,7 @@ def ask(
             question=question,
             use_llm=not no_llm,
         )
-    console.print(answer)
+    console.print(answer, markup=False)
     _print_citations(result)
 
 
@@ -151,7 +151,7 @@ def chat(
                 content=answer,
                 citations_json=json.dumps(citations),
             )
-            console.print(answer)
+            console.print(answer, markup=False)
             _print_citations(result)
 
 
@@ -180,10 +180,10 @@ def ingest(
 ) -> None:
     """Run live source discovery, fetching, LLM extraction, and storage."""
     settings = get_settings()
-    if not settings.openai_api_key:
+    if settings.llm_provider == "openai" and not settings.openai_api_key:
         raise typer.BadParameter(
-            "OPENAI_API_KEY is required for live LLM extraction. "
-            "Use load-fixture for offline demo mode."
+            "OPENAI_API_KEY is required for OpenAI live extraction. "
+            "Use LLM_PROVIDER=codex, LLM_PROVIDER=ollama, or load-fixture for offline demo mode."
         )
     with connect(settings.db_path) as conn:
         try:

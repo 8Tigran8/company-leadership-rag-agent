@@ -14,6 +14,7 @@ def test_cli_help() -> None:
 
 def test_cli_load_fixture_and_ask(tmp_path, monkeypatch) -> None:
     monkeypatch.setenv("COMPANY_RAG_DB_PATH", str(tmp_path / "cli.sqlite"))
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     load_result = runner.invoke(app, ["load-fixture", "data/fixtures/meetcampfire.com.json"])
     assert load_result.exit_code == 0
     assert "Loaded fixture" in load_result.output
@@ -25,3 +26,10 @@ def test_cli_load_fixture_and_ask(tmp_path, monkeypatch) -> None:
     assert ask_result.exit_code == 0
     assert "Paul Nichols" in ask_result.output
     assert "Sources:" in ask_result.output
+
+    fallback_result = runner.invoke(
+        app,
+        ["ask", "meetcampfire.com", "Who's their CTO?"],
+    )
+    assert fallback_result.exit_code == 0
+    assert "[local retrieval mode - OPENAI_API_KEY not set]" in fallback_result.output

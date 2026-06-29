@@ -23,6 +23,10 @@
     {
       "decision": "Make fixture inspection runnable without secrets, but require OPENAI_API_KEY for live LLM extraction.",
       "reason": "Reviewers can inspect the dataset without API keys while the real-LLM path remains explicit."
+    },
+    {
+      "decision": "Add optional Codex and Ollama real-LLM backends.",
+      "reason": "OpenAI API keys may lack quota in local review; Codex subscription auth and local Ollama allow real answer-composition smoke tests without embedding secrets."
     }
   ],
   "subagents": [
@@ -55,6 +59,14 @@
     {
       "timestamp": "2026-06-27T00:00:00+04:00",
       "event": "Added curated Robinhood and Campfire fixtures with source-backed claims and current/former role distinctions."
+    },
+    {
+      "timestamp": "2026-06-29T13:55:00+03:00",
+      "event": "Refreshed Robinhood fixture with full official leadership roster text, added deterministic structured roster extraction, coverage tests, and visible fallback warnings."
+    },
+    {
+      "timestamp": "2026-06-29T14:00:00+03:00",
+      "event": "Added optional Ollama and Codex CLI LLM providers for local real-LLM answer composition without an OpenAI API key."
     }
   ],
   "test_runs": [
@@ -64,7 +76,7 @@
     },
     {
       "command": "uv run pytest",
-      "status": "passed: 7 tests"
+      "status": "passed: 10 tests"
     },
     {
       "command": "uv run ruff check .",
@@ -77,11 +89,19 @@
     {
       "command": "COMPANY_RAG_DB_PATH=/tmp/company-rag-asana.sqlite COMPANY_RAG_CACHE_DIR=/tmp/company-rag-asana-cache uv run company-rag ingest https://asana.com --limit 15 --output-fixture /tmp/asana-fixture.json",
       "status": "passed: extracted 8 people and 9 claims from 7 sources after live-ingest filter hardening"
+    },
+    {
+      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=90 COMPANY_RAG_DB_PATH=/tmp/company-rag-codex.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
+      "status": "passed: Codex subscription-backed LLM composition returned a cited Paul Nichols answer without OPENAI_API_KEY"
+    },
+    {
+      "command": "LLM_PROVIDER=ollama OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_MODEL=qwen2.5:3b COMPANY_RAG_DB_PATH=/tmp/company-rag-ollama.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
+      "status": "passed locally with Ollama qwen2.5:3b"
     }
   ],
   "known_limitations": [
     "Live discovery is intentionally lightweight and may need external search API support for broader company coverage.",
-    "Fixture answers can be inspected without an LLM key; live LLM extraction and LLM answer composition require OPENAI_API_KEY.",
+    "Fixture answers can be inspected without an LLM key; LLM answer composition can use OPENAI_API_KEY, local Ollama, or a locally authenticated Codex CLI.",
     "Campfire marketing leadership uses public third-party/profile evidence because an official Campfire leadership page was not found.",
     "No web UI is included in v1; the submitted interface is the CLI."
   ]

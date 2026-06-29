@@ -1,6 +1,6 @@
 # Verification Report
 
-Generated on 2026-06-27.
+Generated on 2026-06-29.
 
 ## Repository State
 
@@ -21,7 +21,7 @@ uv run ruff check .
 Observed test result:
 
 ```text
-7 passed
+10 passed
 ```
 
 Covered scenarios:
@@ -31,8 +31,11 @@ Covered scenarios:
 - Domain normalization.
 - Role normalization.
 - Fixture import.
+- Structured official leadership roster extraction.
+- Fixture claim/source-text support checks.
 - Structured question routing for Robinhood.
 - Structured question routing for Campfire.
+- Visible local-retrieval fallback warning when `OPENAI_API_KEY` is absent.
 
 ## Fixture Demo Checks
 
@@ -40,9 +43,10 @@ Robinhood fixture:
 
 - Loaded `data/fixtures/robinhood.com.json`.
 - CTO question correctly does not return former CTO Jeffrey Pinner as current.
-- VP count returns 10 current VP/SVP/EVP leaders.
+- VP count returns 12 current VP/SVP/EVP leaders from the official leadership roster.
 - Marketing leadership returns Deepak Rao as strongest match and Carley Olivas as related evidence.
 - CEO location returns Vlad Tenev as Bay Area of California, using person-specific bio evidence.
+- The official leadership roster source text contains all stored name/title pairs and excludes Strategic Advisor Jason Warnick from current operating leadership answers.
 
 Campfire fixture:
 
@@ -54,15 +58,25 @@ Campfire fixture:
 
 ## Real LLM Smoke
 
-Environment had `OPENAI_API_KEY` present.
+OpenAI API path was checked locally on 2026-06-29. The SDK reached OpenAI but the available key returned `429 insufficient_quota`, so the final completion was not run through that key.
 
-Verified:
+Codex subscription-backed LLM composition was verified without an API key:
 
 ```bash
+unset OPENAI_API_KEY
+LLM_PROVIDER=codex \
+CODEX_TIMEOUT_SECONDS=90 \
+COMPANY_RAG_DB_PATH=/tmp/company-rag-codex.sqlite \
 uv run company-rag ask meetcampfire.com "Who's their CTO?"
 ```
 
-The command used LLM answer composition and returned a cited answer for Paul Nichols.
+Observed answer:
+
+```text
+Paul Nichols is their Chief Technology Officer (CTO) [1].
+```
+
+This mode uses official `codex exec` with local ChatGPT/Codex subscription auth. It is intended as an optional local review path; reviewers can still use `OPENAI_API_KEY`, Ollama, or `--no-llm`.
 
 ## Live Ingest Smoke On Third Company
 
@@ -104,4 +118,5 @@ The generated zip excludes:
 - Live discovery is lightweight and intentionally not a full web-search system.
 - External search APIs are optional and not required for the fixture demo.
 - Public company leadership pages can change; fixtures are dated.
+- Robinhood's investor site can be slow or block plain HTTP clients; the committed fixture keeps the official roster text so coverage can be verified offline.
 - Campfire has sparse official leadership data, so some marketing/location evidence uses public profile or third-party sources with confidence caveats.
