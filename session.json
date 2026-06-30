@@ -31,6 +31,10 @@
     {
       "decision": "Extract explicit role sentences deterministically before LLM fallback.",
       "reason": "Live pages often contain simple high-signal phrases such as 'led by CTO Paul Nichols'; deterministic extraction prevents obvious public evidence from being missed by a probabilistic LLM response."
+    },
+    {
+      "decision": "Resolve the Codex Desktop bundled CLI on macOS when `codex` is not on PATH.",
+      "reason": "Reviewers can run `LLM_PROVIDER=codex` from Terminal after installing/signing into Codex Desktop without extra shell setup."
     }
   ],
   "subagents": [
@@ -75,6 +79,10 @@
     {
       "timestamp": "2026-06-29T20:35:00+03:00",
       "event": "Hardened full Codex-backed live ingest by adding deterministic inline role extraction and normalization for empty optional fields in LLM JSON payloads."
+    },
+    {
+      "timestamp": "2026-06-30T11:15:00+03:00",
+      "event": "Verified fresh clone setup, updated delivery checklist, and documented the Codex Desktop CLI fallback plus real LLM example transcript."
     }
   ],
   "test_runs": [
@@ -84,7 +92,7 @@
     },
     {
       "command": "uv run pytest",
-      "status": "passed: 13 tests"
+      "status": "passed: 14 tests"
     },
     {
       "command": "uv run ruff check .",
@@ -109,6 +117,10 @@
     {
       "command": "LLM_PROVIDER=ollama OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_MODEL=qwen2.5:3b COMPANY_RAG_DB_PATH=/tmp/company-rag-ollama.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
       "status": "passed locally with Ollama qwen2.5:3b"
+    },
+    {
+      "command": "git clone https://github.com/8Tigran8/company-leadership-rag-agent.git /tmp/company-rag-fresh/repo && cd /tmp/company-rag-fresh/repo && uv sync --frozen && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag load-fixture data/fixtures/robinhood.com.json && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag ask robinhood.com \"How many VPs do they have?\" --no-llm && uv run pytest -q",
+      "status": "passed: fresh clone installed from lockfile, returned the Robinhood VP fixture answer with citations, and passed 14 tests"
     }
   ],
   "known_limitations": [

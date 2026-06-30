@@ -1,6 +1,6 @@
 # Verification Report
 
-Generated on 2026-06-29.
+Generated on 2026-06-30.
 
 ## Repository State
 
@@ -21,7 +21,7 @@ uv run ruff check .
 Observed test result:
 
 ```text
-13 passed
+14 passed
 ```
 
 Covered scenarios:
@@ -34,6 +34,7 @@ Covered scenarios:
 - Structured official leadership roster extraction.
 - Deterministic inline role extraction for explicit live-source sentences.
 - LLM extraction payload normalization for empty optional fields.
+- Codex Desktop CLI fallback on macOS when `codex` is not on `PATH`.
 - Fixture claim/source-text support checks.
 - Structured question routing for Robinhood.
 - Structured question routing for Campfire.
@@ -137,6 +138,23 @@ The generated zip excludes:
 - `.ruff_cache`
 - `__pycache__`
 - local SQLite files
+
+## Fresh Clone Check
+
+Verified on 2026-06-30:
+
+```bash
+git clone https://github.com/8Tigran8/company-leadership-rag-agent.git /tmp/company-rag-fresh/repo
+cd /tmp/company-rag-fresh/repo
+uv sync --frozen
+COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite \
+  uv run company-rag load-fixture data/fixtures/robinhood.com.json
+COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite \
+  uv run company-rag ask robinhood.com "How many VPs do they have?" --no-llm
+uv run pytest -q
+```
+
+Result: install succeeded from `uv.lock`, the Robinhood VP fixture answer returned 12 current VP/SVP/EVP leaders with citations, and the fresh-clone test suite passed.
 
 ## Remaining Caveats
 

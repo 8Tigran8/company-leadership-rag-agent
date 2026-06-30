@@ -68,6 +68,8 @@ uv run company-rag load-fixture data/fixtures/meetcampfire.com.json
 uv run company-rag ask meetcampfire.com "Who's their CTO?"
 ```
 
+On macOS with Codex Desktop, the app-bundled CLI is also detected at `/Applications/Codex.app/Contents/Resources/codex` when `codex` is not on `PATH`. Reviewers can also set `CODEX_COMMAND` explicitly.
+
 This mode is intended for local review smoke tests. Reviewers who do not have Codex CLI auth can use `OPENAI_API_KEY`, Ollama, or `--no-llm`.
 
 Without `OPENAI_API_KEY`, `ask --no-llm` uses deterministic structured retrieval over the fixture. That mode is not a mocked LLM completion; it is provided so the stored data and retrieval logic are reviewable without secrets.
@@ -131,6 +133,28 @@ Excluded by default:
 - Article authors without current leadership roles.
 
 Every answer cites collected source evidence. If a fact is missing, the answer says so directly.
+
+## Example Transcript
+
+```bash
+unset OPENAI_API_KEY
+export LLM_PROVIDER=codex
+export CODEX_TIMEOUT_SECONDS=180
+export COMPANY_RAG_DB_PATH=/tmp/company-rag-full.sqlite
+export COMPANY_RAG_CACHE_DIR=/tmp/company-rag-full-cache
+
+uv run company-rag ingest https://meetcampfire.com --limit 8 --output-fixture /tmp/campfire-live.json
+uv run company-rag inspect meetcampfire.com
+uv run company-rag ask meetcampfire.com "Who's their CTO?"
+```
+
+Observed:
+
+```text
+Ingested meetcampfire.com: 2 people, 2 claims, 5 sources.
+People: John Glasgow (Founder), Paul Nichols (CTO)
+Paul Nichols is their CTO [1].
+```
 
 ## Environment
 
