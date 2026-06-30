@@ -3,10 +3,41 @@
   "created_at": "2026-06-27T00:00:00+04:00",
   "task": "Company Leadership RAG Agent",
   "status": "implemented",
+  "session_purpose": "Document how a coding agent was used to plan, implement, verify, and package the take-home project.",
+  "global_prompts": [
+    {
+      "prompt": "Read the take-home brief and convert it into explicit acceptance criteria, risks, deliverables, and evaluation priorities.",
+      "outcome": "Created a requirements map covering data collection, storage, chat interface, real LLM usage, fixtures, and coding-agent evidence."
+    },
+    {
+      "prompt": "Design a lean end-to-end architecture that can ingest public company leadership data, preserve source provenance, and answer leadership questions with citations.",
+      "outcome": "Chose a Python CLI, SQLite storage, source-backed claims, JSON fixtures, structured retrieval, and optional LLM answer composition."
+    },
+    {
+      "prompt": "Plan the data model so the system can represent current roles, former roles, locations, conflicting claims, source evidence, and fixture import/export.",
+      "outcome": "Separated companies, sources, people, claims, and chat sessions; preserved original titles and normalized roles for reliable retrieval."
+    },
+    {
+      "prompt": "Implement the smallest complete product path first, then expand only where verification shows a real need.",
+      "outcome": "Built CLI commands for ingestion, fixture loading/export, inspection, one-off questions, interactive chat, and session export."
+    },
+    {
+      "prompt": "Use real LLM calls for extraction and answer composition while keeping deterministic retrieval for count, role, and source-grounded questions.",
+      "outcome": "Implemented OpenAI-compatible, Codex CLI, and Ollama provider paths without mocked completions."
+    },
+    {
+      "prompt": "Create reproducible fixtures for the required inputs and make the review path work without secrets or network access.",
+      "outcome": "Committed two source-backed fixtures and fixture tests that validate citation coverage, role filtering, and required question behavior."
+    },
+    {
+      "prompt": "Verify the repository as a reviewer would: fresh clone, dependency install, tests, lint, metrics, chat smoke, live smoke, and secret scan.",
+      "outcome": "Added a scorecard and reproducible evaluation script, then recorded the final submission readiness evidence."
+    }
+  ],
   "implementation_plan": [
     {
       "phase": "Requirements and evaluation framing",
-      "goal": "Turn the PDF brief into explicit acceptance criteria, identify hidden risks, and decide what a reviewer needs to see in the repository.",
+      "goal": "Translate the brief into concrete checks and decide what evidence a reviewer needs.",
       "outputs": [
         "docs/assignment.md",
         "docs/acceptance-criteria.md",
@@ -15,17 +46,18 @@
       ]
     },
     {
-      "phase": "Architecture and storage design",
-      "goal": "Design a lean end-to-end system around public source collection, source-backed leadership claims, and deterministic retrieval for count/role questions.",
+      "phase": "Architecture and data model",
+      "goal": "Design a small but complete RAG system around public sources, structured facts, and cited answers.",
       "outputs": [
-        "SQLite schema for companies, sources, people, claims, and chat sessions",
-        "JSON fixture import/export model",
-        "Typer CLI command surface"
+        "SQLite schema",
+        "source-backed claim model",
+        "JSON fixture format",
+        "CLI command surface"
       ]
     },
     {
-      "phase": "Data sourcing and fixtures",
-      "goal": "Collect reviewable public evidence for both required inputs, distinguish current and former leadership, and preserve citations.",
+      "phase": "Data sourcing and fixture creation",
+      "goal": "Collect reviewable public evidence for the required companies and store it in reproducible fixtures.",
       "outputs": [
         "data/fixtures/robinhood.com.json",
         "data/fixtures/meetcampfire.com.json",
@@ -33,173 +65,115 @@
       ]
     },
     {
-      "phase": "RAG and chat implementation",
-      "goal": "Answer required leadership questions with structured retrieval first, then optionally compose final answers with a real LLM.",
+      "phase": "Retrieval and chat implementation",
+      "goal": "Answer the required leadership question categories with deterministic retrieval and optional real LLM composition.",
       "outputs": [
         "company-rag ask",
         "company-rag chat",
-        "OpenAI-compatible, Codex CLI, and Ollama LLM provider paths"
+        "LLM provider abstraction"
       ]
     },
     {
-      "phase": "Verification and hardening",
-      "goal": "Run fixture tests, live ingestion smoke tests, fresh-clone checks, and fix issues uncovered by those checks.",
+      "phase": "Verification and submission packaging",
+      "goal": "Prove that the repository works from a fresh clone and that the stored data is source-grounded.",
       "outputs": [
         "tests/",
-        "docs/verification-report.md",
-        "docs/evaluation-metrics.md",
         "scripts/evaluate.py",
+        "docs/evaluation-metrics.md",
+        "docs/verification-report.md",
         "session.json"
       ]
     }
   ],
-  "collaboration_loop": [
-    "Use the coding agent first to decompose the PDF into acceptance criteria and risks.",
-    "Ask agent sub-tasks to pressure-test architecture and source strategy before implementation.",
-    "Implement the smallest complete CLI path, then run fixture tests and real LLM smoke tests.",
-    "Treat failed live runs as product feedback: harden extraction, validation, and reviewer setup instead of only patching the immediate command.",
-    "Keep the final repository reviewable through documentation, fixtures, test evidence, and a fresh-clone verification."
-  ],
+  "architecture_summary": {
+    "interface": "CLI with one-off ask mode and interactive chat mode.",
+    "storage": "SQLite for reusable local state plus deterministic JSON fixtures for review.",
+    "data_model": "Companies, sources, people, claims, and chat messages are stored separately so provenance and role status are explicit.",
+    "retrieval": "Structured retrieval handles role lookup, counts, function leadership, and location questions before optional LLM composition.",
+    "llm_usage": "Real LLM providers are used for live extraction and final answer wording; deterministic fixture inspection remains available for review without secrets.",
+    "citations": "Answers cite stored source titles, URLs, and evidence snippets."
+  },
   "decisions": [
     {
-      "decision": "Use a lean Python CLI-first architecture.",
-      "reason": "The assignment rewards data sourcing, storage design, and agent architecture more than UI complexity."
+      "decision": "Use a lean Python CLI-first implementation.",
+      "reason": "The assignment allows any reasonable interface, and a CLI keeps the project focused on data sourcing, storage, and RAG behavior."
     },
     {
-      "decision": "Use SQLite plus JSON fixtures as the core storage approach.",
-      "reason": "Leadership Q&A needs structured role/count queries, source-backed claims, and reproducible fixture loading."
+      "decision": "Use SQLite plus committed JSON fixtures.",
+      "reason": "The system needs structured queries, repeatable review data, and a simple clone-and-go setup."
     },
     {
-      "decision": "Keep people and claims separate.",
-      "reason": "This preserves former, conflicting, or lower-confidence public claims instead of overwriting provenance."
+      "decision": "Store claims separately from people.",
+      "reason": "Leadership data can be current, former, incomplete, or conflicting; claims preserve provenance without overwriting facts."
     },
     {
       "decision": "Use structured retrieval before LLM answer composition.",
-      "reason": "Questions such as VP counts and CTO lookup are more reliable as SQL-backed queries."
+      "reason": "Count and role questions are safer and easier to evaluate when grounded in SQL-backed facts."
     },
     {
-      "decision": "Make fixture inspection runnable without secrets, but require OPENAI_API_KEY for live LLM extraction.",
-      "reason": "Reviewers can inspect the dataset without API keys while the real-LLM path remains explicit."
+      "decision": "Make the fixture path runnable without secrets while keeping real LLM paths available.",
+      "reason": "Reviewers can inspect and test the dataset immediately, then run live extraction or LLM composition with their preferred provider."
     },
     {
-      "decision": "Add optional Codex and Ollama real-LLM backends.",
-      "reason": "OpenAI API keys may lack quota in local review; Codex subscription auth and local Ollama allow real answer-composition smoke tests without embedding secrets."
-    },
-    {
-      "decision": "Extract explicit role sentences deterministically before LLM fallback.",
-      "reason": "Live pages often contain simple high-signal phrases such as 'led by CTO Paul Nichols'; deterministic extraction prevents obvious public evidence from being missed by a probabilistic LLM response."
-    },
-    {
-      "decision": "Resolve the Codex Desktop bundled CLI on macOS when `codex` is not on PATH.",
-      "reason": "Reviewers can run `LLM_PROVIDER=codex` from Terminal after installing/signing into Codex Desktop without extra shell setup."
+      "decision": "Measure readiness with a reproducible scorecard.",
+      "reason": "The final submission should show objective evidence for tests, citations, data quality, required questions, fresh-clone setup, and secret hygiene."
     }
   ],
-  "subagents": [
+  "agent_workstreams": [
     {
-      "name": "Requirements/risk audit",
-      "summary": "Extracted strict requirements, hidden evaluation criteria, risks, edge cases, and README obligations from the assignment."
+      "name": "Requirements and risk analysis",
+      "summary": "Mapped the PDF brief into acceptance criteria, non-goals, likely reviewer expectations, and delivery risks."
     },
     {
-      "name": "Architecture/MVP audit",
-      "summary": "Recommended Python, Typer, SQLite, real LLM extraction, source provenance, fixture mode, structured query router, and optional web UI after CLI."
+      "name": "Architecture planning",
+      "summary": "Designed the storage model, ingestion pipeline, retrieval strategy, CLI commands, and real-LLM integration points."
     },
     {
-      "name": "Robinhood source research",
-      "summary": "Verified official Robinhood IR leadership source, Vlad Tenev bio, current VP/marketing evidence, and the May 2026 SEC 8-K indicating Jeffrey Pinner is not current CTO."
+      "name": "Public data sourcing",
+      "summary": "Collected public source evidence for the required company inputs and encoded it in reviewable fixtures."
     },
     {
-      "name": "Campfire source research",
-      "summary": "Verified meetcampfire.com redirects to campfire.ai; identified current CEO, CTO, Head of Product, VP Marketing, and historical former CTO evidence."
+      "name": "Implementation",
+      "summary": "Built the CLI, database layer, fixture import/export, source fetching, extraction, retrieval, chat, and answer composition paths."
+    },
+    {
+      "name": "Verification",
+      "summary": "Ran automated tests, lint, fresh-clone checks, data-quality metrics, chat smoke tests, live smoke tests, and secret scans."
     }
   ],
-  "implementation_log": [
-    {
-      "timestamp": "2026-06-27T00:00:00+04:00",
-      "event": "Created initial repository scaffold and planning documentation."
+  "verification_summary": {
+    "tests": "14/14 passed",
+    "lint": "passed",
+    "fresh_clone": "passed",
+    "secret_scan": "clean",
+    "fixtures": "2 committed fixtures",
+    "data_quality": {
+      "people": 29,
+      "claims": 31,
+      "sources": 9,
+      "claim_source_url_coverage": "31/31",
+      "claim_evidence_coverage": "31/31",
+      "claim_source_text_support": "31/31",
+      "golden_questions": "8/8"
     },
-    {
-      "timestamp": "2026-06-27T00:00:00+04:00",
-      "event": "Implemented SQLite schema, fixture import/export, domain/title normalization, structured retrieval, CLI commands, live ingestion skeleton, OpenAI-backed extraction and answer composition."
-    },
-    {
-      "timestamp": "2026-06-27T00:00:00+04:00",
-      "event": "Added curated Robinhood and Campfire fixtures with source-backed claims and current/former role distinctions."
-    },
-    {
-      "timestamp": "2026-06-29T13:55:00+03:00",
-      "event": "Refreshed Robinhood fixture with full official leadership roster text, added deterministic structured roster extraction, coverage tests, and visible fallback warnings."
-    },
-    {
-      "timestamp": "2026-06-29T14:00:00+03:00",
-      "event": "Added optional Ollama and Codex CLI LLM providers for local real-LLM answer composition without an OpenAI API key."
-    },
-    {
-      "timestamp": "2026-06-29T20:35:00+03:00",
-      "event": "Hardened full Codex-backed live ingest by adding deterministic inline role extraction and normalization for empty optional fields in LLM JSON payloads."
-    },
-    {
-      "timestamp": "2026-06-30T11:15:00+03:00",
-      "event": "Verified fresh clone setup, updated delivery checklist, and documented the Codex Desktop CLI fallback plus real LLM example transcript."
-    },
-    {
-      "timestamp": "2026-06-30T12:20:00+03:00",
-      "event": "Added a reproducible evaluation metrics script and scorecard covering fixture data quality, golden questions, secret scan, fresh clone, chat smoke, and live Codex ingest smoke."
-    }
-  ],
-  "test_runs": [
-    {
-      "command": "uv run company-rag --help",
-      "status": "passed"
-    },
-    {
-      "command": "uv run pytest",
-      "status": "passed: 14 tests"
-    },
-    {
-      "command": "uv run ruff check .",
-      "status": "passed"
-    },
-    {
-      "command": "COMPANY_RAG_DB_PATH=/tmp/company-rag-smoke.sqlite uv run company-rag load-fixture data/fixtures/robinhood.com.json && COMPANY_RAG_DB_PATH=/tmp/company-rag-smoke.sqlite uv run company-rag ask robinhood.com \"Where is their CEO based?\" --no-llm",
-      "status": "passed"
-    },
-    {
-      "command": "COMPANY_RAG_DB_PATH=/tmp/company-rag-asana.sqlite COMPANY_RAG_CACHE_DIR=/tmp/company-rag-asana-cache uv run company-rag ingest https://asana.com --limit 15 --output-fixture /tmp/asana-fixture.json",
-      "status": "passed: extracted 8 people and 9 claims from 7 sources after live-ingest filter hardening"
-    },
-    {
-      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=90 COMPANY_RAG_DB_PATH=/tmp/company-rag-codex.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
-      "status": "passed: Codex subscription-backed LLM composition returned a cited Paul Nichols answer without OPENAI_API_KEY"
-    },
-    {
-      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 COMPANY_RAG_DB_PATH=/tmp/company-rag-live-codex-fixed2.sqlite COMPANY_RAG_CACHE_DIR=/tmp/company-rag-live-codex-fixed2-cache uv run company-rag ingest https://meetcampfire.com --limit 8 --output-fixture /tmp/company-rag-live-codex-fixed2-fixture.json",
-      "status": "passed: full live ingest extracted John Glasgow and Paul Nichols from live-fetched Campfire sources; LLM ask returned Paul Nichols as CTO with citation"
-    },
-    {
-      "command": "LLM_PROVIDER=ollama OPENAI_BASE_URL=http://localhost:11434/v1 OPENAI_MODEL=qwen2.5:3b COMPANY_RAG_DB_PATH=/tmp/company-rag-ollama.sqlite uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
-      "status": "passed locally with Ollama qwen2.5:3b"
-    },
-    {
-      "command": "git clone https://github.com/8Tigran8/company-leadership-rag-agent.git /tmp/company-rag-fresh/repo && cd /tmp/company-rag-fresh/repo && uv sync --frozen && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag load-fixture data/fixtures/robinhood.com.json && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag ask robinhood.com \"How many VPs do they have?\" --no-llm && uv run pytest -q",
-      "status": "passed: fresh clone installed from lockfile, returned the Robinhood VP fixture answer with citations, and passed 14 tests"
-    },
-    {
-      "command": "uv run python scripts/evaluate.py",
-      "status": "passed: overall_status pass; 2 fixtures, 29 people, 31 claims, 9 sources, 8/8 golden questions, 100% claim source URL/evidence/source-text support coverage"
-    },
-    {
-      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 uv run company-rag ingest https://meetcampfire.com --limit 8 --output-fixture /tmp/company-rag-live-campfire.json && uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
-      "status": "passed: live Campfire smoke fetched 5 sources, extracted 2 people and 2 claims, and answered Paul Nichols as CTO with citation"
-    },
-    {
-      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 uv run company-rag ingest https://robinhood.com --limit 8 --output-fixture /tmp/company-rag-live-robinhood.json",
-      "status": "degraded external-source smoke: general Robinhood pages fetched, but investor leadership pages timed out and SEC blocked undeclared automated access; committed official Robinhood fixture remains the reliable review path"
-    }
+    "metrics_command": "uv run python scripts/evaluate.py"
+  },
+  "deliverables": [
+    "README.md",
+    ".env.example",
+    "pyproject.toml",
+    "uv.lock",
+    "data/fixtures/robinhood.com.json",
+    "data/fixtures/meetcampfire.com.json",
+    "scripts/evaluate.py",
+    "docs/evaluation-metrics.md",
+    "docs/verification-report.md",
+    "session.json"
   ],
   "known_limitations": [
-    "Live discovery is intentionally lightweight and may need external search API support for broader company coverage.",
-    "Fixture answers can be inspected without an LLM key; LLM answer composition can use OPENAI_API_KEY, local Ollama, or a locally authenticated Codex CLI.",
-    "Campfire marketing leadership uses public third-party/profile evidence because an official Campfire leadership page was not found.",
-    "No web UI is included in v1; the submitted interface is the CLI."
+    "Live discovery is intentionally lightweight and may need external search support for broader coverage.",
+    "Public leadership pages can be incomplete or change over time.",
+    "Fixture inspection works without secrets; live LLM extraction requires a configured provider.",
+    "The submitted interface is a CLI rather than a web UI."
   ]
 }
