@@ -181,6 +181,7 @@ The SQLite database, cache, and local runtime artifacts are ignored by git.
 ```bash
 uv run pytest
 uv run ruff check .
+uv run python scripts/evaluate.py
 ```
 
 Live tests are intended to be marked with `pytest -m live` and skipped when `OPENAI_API_KEY` is absent.

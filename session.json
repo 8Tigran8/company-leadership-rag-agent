@@ -47,6 +47,8 @@
       "outputs": [
         "tests/",
         "docs/verification-report.md",
+        "docs/evaluation-metrics.md",
+        "scripts/evaluate.py",
         "session.json"
       ]
     }
@@ -138,6 +140,10 @@
     {
       "timestamp": "2026-06-30T11:15:00+03:00",
       "event": "Verified fresh clone setup, updated delivery checklist, and documented the Codex Desktop CLI fallback plus real LLM example transcript."
+    },
+    {
+      "timestamp": "2026-06-30T12:20:00+03:00",
+      "event": "Added a reproducible evaluation metrics script and scorecard covering fixture data quality, golden questions, secret scan, fresh clone, chat smoke, and live Codex ingest smoke."
     }
   ],
   "test_runs": [
@@ -176,6 +182,18 @@
     {
       "command": "git clone https://github.com/8Tigran8/company-leadership-rag-agent.git /tmp/company-rag-fresh/repo && cd /tmp/company-rag-fresh/repo && uv sync --frozen && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag load-fixture data/fixtures/robinhood.com.json && COMPANY_RAG_DB_PATH=/tmp/company-rag-fresh/check.sqlite uv run company-rag ask robinhood.com \"How many VPs do they have?\" --no-llm && uv run pytest -q",
       "status": "passed: fresh clone installed from lockfile, returned the Robinhood VP fixture answer with citations, and passed 14 tests"
+    },
+    {
+      "command": "uv run python scripts/evaluate.py",
+      "status": "passed: overall_status pass; 2 fixtures, 29 people, 31 claims, 9 sources, 8/8 golden questions, 100% claim source URL/evidence/source-text support coverage"
+    },
+    {
+      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 uv run company-rag ingest https://meetcampfire.com --limit 8 --output-fixture /tmp/company-rag-live-campfire.json && uv run company-rag ask meetcampfire.com \"Who's their CTO?\"",
+      "status": "passed: live Campfire smoke fetched 5 sources, extracted 2 people and 2 claims, and answered Paul Nichols as CTO with citation"
+    },
+    {
+      "command": "LLM_PROVIDER=codex CODEX_TIMEOUT_SECONDS=180 uv run company-rag ingest https://robinhood.com --limit 8 --output-fixture /tmp/company-rag-live-robinhood.json",
+      "status": "degraded external-source smoke: general Robinhood pages fetched, but investor leadership pages timed out and SEC blocked undeclared automated access; committed official Robinhood fixture remains the reliable review path"
     }
   ],
   "known_limitations": [

@@ -16,6 +16,7 @@ Passed:
 uv run company-rag --help
 uv run pytest
 uv run ruff check .
+uv run python scripts/evaluate.py
 ```
 
 Observed test result:
@@ -35,6 +36,7 @@ Covered scenarios:
 - Deterministic inline role extraction for explicit live-source sentences.
 - LLM extraction payload normalization for empty optional fields.
 - Codex Desktop CLI fallback on macOS when `codex` is not on `PATH`.
+- Reproducible evaluation metrics and golden-question scorecard.
 - Fixture claim/source-text support checks.
 - Structured question routing for Robinhood.
 - Structured question routing for Campfire.

@@ -11,6 +11,16 @@ from bs4 import BeautifulSoup
 from company_rag.models import SourceDocument
 from company_rag.normalize import slugify
 
+FETCH_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36 "
+        "company-leadership-rag-agent/0.1"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
 
 def fetch_source(url: str, *, company_domain: str, cache_dir: Path) -> SourceDocument | None:
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -19,7 +29,7 @@ def fetch_source(url: str, *, company_domain: str, cache_dir: Path) -> SourceDoc
             url,
             follow_redirects=True,
             timeout=20,
-            headers={"User-Agent": "company-leadership-rag-agent/0.1"},
+            headers=FETCH_HEADERS,
         )
     except httpx.HTTPError:
         return None
