@@ -3,6 +3,61 @@
   "created_at": "2026-06-27T00:00:00+04:00",
   "task": "Company Leadership RAG Agent",
   "status": "implemented",
+  "implementation_plan": [
+    {
+      "phase": "Requirements and evaluation framing",
+      "goal": "Turn the PDF brief into explicit acceptance criteria, identify hidden risks, and decide what a reviewer needs to see in the repository.",
+      "outputs": [
+        "docs/assignment.md",
+        "docs/acceptance-criteria.md",
+        "docs/risk-register.md",
+        "docs/delivery-checklist.md"
+      ]
+    },
+    {
+      "phase": "Architecture and storage design",
+      "goal": "Design a lean end-to-end system around public source collection, source-backed leadership claims, and deterministic retrieval for count/role questions.",
+      "outputs": [
+        "SQLite schema for companies, sources, people, claims, and chat sessions",
+        "JSON fixture import/export model",
+        "Typer CLI command surface"
+      ]
+    },
+    {
+      "phase": "Data sourcing and fixtures",
+      "goal": "Collect reviewable public evidence for both required inputs, distinguish current and former leadership, and preserve citations.",
+      "outputs": [
+        "data/fixtures/robinhood.com.json",
+        "data/fixtures/meetcampfire.com.json",
+        "docs/data-sourcing-policy.md"
+      ]
+    },
+    {
+      "phase": "RAG and chat implementation",
+      "goal": "Answer required leadership questions with structured retrieval first, then optionally compose final answers with a real LLM.",
+      "outputs": [
+        "company-rag ask",
+        "company-rag chat",
+        "OpenAI-compatible, Codex CLI, and Ollama LLM provider paths"
+      ]
+    },
+    {
+      "phase": "Verification and hardening",
+      "goal": "Run fixture tests, live ingestion smoke tests, fresh-clone checks, and fix issues uncovered by those checks.",
+      "outputs": [
+        "tests/",
+        "docs/verification-report.md",
+        "session.json"
+      ]
+    }
+  ],
+  "collaboration_loop": [
+    "Use the coding agent first to decompose the PDF into acceptance criteria and risks.",
+    "Ask agent sub-tasks to pressure-test architecture and source strategy before implementation.",
+    "Implement the smallest complete CLI path, then run fixture tests and real LLM smoke tests.",
+    "Treat failed live runs as product feedback: harden extraction, validation, and reviewer setup instead of only patching the immediate command.",
+    "Keep the final repository reviewable through documentation, fixtures, test evidence, and a fresh-clone verification."
+  ],
   "decisions": [
     {
       "decision": "Use a lean Python CLI-first architecture.",
