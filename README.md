@@ -44,7 +44,7 @@ The PDF asks reviewers to test two company inputs: `https://meetcampfire.com/` a
 | `https://robinhood.com/` | Who heads marketing? | Deepak Rao |
 | `https://robinhood.com/` | Where is their CEO based? | Vlad Tenev is listed as based in the Bay Area of California |
 
-The reproducible scorecard is in [`docs/evaluation-metrics.md`](docs/evaluation-metrics.md). Run it with:
+The full human-readable leadership tables are in [`docs/leadership-results.md`](docs/leadership-results.md), and the reproducible scorecard is in [`docs/evaluation-metrics.md`](docs/evaluation-metrics.md). Run the scorecard with:
 
 ```bash
 uv run python scripts/evaluate.py

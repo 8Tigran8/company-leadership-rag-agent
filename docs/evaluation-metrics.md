@@ -10,6 +10,8 @@ uv run python scripts/evaluate.py
 
 The script loads committed fixtures into temporary SQLite databases, runs the required golden questions, checks citation/evidence coverage, and exits non-zero if a threshold fails.
 
+The full leadership tables for both required inputs are in [`docs/leadership-results.md`](leadership-results.md).
+
 ## Scorecard
 
 | Area | Metric | Result | Status |
