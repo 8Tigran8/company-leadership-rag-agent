@@ -29,6 +29,27 @@ uv run company-rag ask meetcampfire.com "Who's their CTO?" --no-llm
 
 `meetcampfire.com` redirects to `campfire.ai`; the fixture keeps the assignment domain as the company key and cites current `campfire.ai` public sources.
 
+## Required Test Inputs Results
+
+The PDF asks reviewers to test two company inputs: `https://meetcampfire.com/` and `https://robinhood.com/`. Both are covered by committed fixtures, automated golden questions, and cited answers.
+
+| Company input | Question | Result |
+| --- | --- | --- |
+| `https://meetcampfire.com/` | Who's their CTO? | Paul Nichols |
+| `https://meetcampfire.com/` | How many VPs do they have? | 1 current VP/SVP/EVP leader |
+| `https://meetcampfire.com/` | Who heads marketing? | Katrina Queirolo |
+| `https://meetcampfire.com/` | Where is their CEO based? | John Glasgow is listed as based in San Francisco, California |
+| `https://robinhood.com/` | Who's their CTO? | No verified current CTO in the collected public sources; former CTO evidence is excluded from current-role answers |
+| `https://robinhood.com/` | How many VPs do they have? | 12 current VP/SVP/EVP leaders |
+| `https://robinhood.com/` | Who heads marketing? | Deepak Rao |
+| `https://robinhood.com/` | Where is their CEO based? | Vlad Tenev is listed as based in the Bay Area of California |
+
+The reproducible scorecard is in [`docs/evaluation-metrics.md`](docs/evaluation-metrics.md). Run it with:
+
+```bash
+uv run python scripts/evaluate.py
+```
+
 ## Real LLM Mode
 
 The assignment requires real LLM calls and no mocked completions. Set an OpenAI-compatible key for live extraction and LLM answer composition:
